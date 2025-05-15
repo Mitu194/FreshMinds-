@@ -1,0 +1,39 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Employee Records</title>  
+     {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>  
+<body>  
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    <tr>  
+        <th>Positions ID</th>  
+        <th>Positions Name</th>  
+        <th>Company Category ID</th>  
+        <th>Actions</th>  
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for position in positions %}  
+    <tr>  
+        <td>{{ position.positionid }}</td>  
+        <td>{{ position.positionname }}</td>  
+        <td>{{ position.ccid }}</td>    
+        <td>  
+            <a href="/editpstn/{{ position.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
+            <a href="/deletepstn/{{ position.id }}">Delete</a>  
+        </td>  
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  
+<br>  
+<br>  
+<center><a href="/pstn" class="btn btn-primary">Add New Record</a></center>  
+</body>  
+</html>

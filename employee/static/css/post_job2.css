@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    color: #333;
+}
+
+header {
+    background-color: black;
+    color: #fff;
+    padding: 3px;
+    position: sticky;
+    top:0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo img {
+    width: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+nav a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile p {
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+.user-profile img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+.user-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 100px;
+    margin-right: 30px;
+}
+.logo{
+	height: 60px; 
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="email"], input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.add-btn, .delete-btn {
+    margin: 5px;
+    font-size: 14px;
+}
+
+.question {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.manual-question {
+    margin-top: 20px;
+}
+
+.submit-container {
+    text-align: center;
+    margin-top: 20px;
+}
+.Notification{
+    /*border: 2px black solid;*/
+    max-height: 100%;
+    width: 600px;
+    margin-left: 35%;
+    margin-top: 10%;
+    padding-bottom: 2%;
+    border-radius: 2%;
+    overflow-y: scroll;
+    position: absolute;  
+}
+.Notification::-webkit-scrollbar{
+    border-radius: 2px;
+}
+.Notification-header{
+    margin-top: 0px;
+    padding-bottom: 2%;
+    box-shadow: 0px 2px  2px black;
+}
+.Notification-header h2{
+    margin-left: 5%;
+}
+.Notification-header a{
+    margin-left: 5%;
+}
+.Notification i {
+    margin-left: 70%;
+    font-size: 30px;
+}
+.profile-pic a img{
+    vertical-align: middle;
+    height: 10%;
+    width: 10%;
+    border-radius: 50%;
+}
+.Notification-content{
+    margin-top: 2%;
+    margin-left: 2%;
+    background-color:rgba(248, 248, 252, 0.922);
+}
+.Notification-content h6,p{
+    margin-left: 2%;
+}
+.Notification-content p{
+    margin-top: -0.5%;
+}
+.desc{
+    display: -webkit-inline-box;
+}
+.Notification .btn{
+    margin-left: 15px;
+    height: 40px;
+    margin-top: -6%;
+}
+.reject{
+    display: inline-block;
+}
+
+#overlay{
+    position: fixed;
+    display: none;
+    width: 50%;
+    height: 80%;
+    margin-top: 5%;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #fff;
+    z-index: 100;
+    cursor: pointer;
+}
+button a{
+    text-decoration: none !important;
+    color: #f4f4f9;
+}

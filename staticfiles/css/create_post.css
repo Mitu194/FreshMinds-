@@ -1,0 +1,232 @@
+/*header*/
+main{
+    display: flex;
+    justify-content: space-between; 
+  }
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  a button{
+    text-decoration: none;
+    color: white;
+  }
+  header {
+    background-color: black;
+    color: #fff;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .logo img {
+    width: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  nav a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-profile p {
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+  
+  .user-profile img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .user-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 100px;
+    margin-right: 30px;
+  }
+  
+  .div1 {
+    flex: 1;
+    margin-right: 8px;
+  }
+
+/*end header*/
+/* Modal */
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header, .modal-body, .modal-footer {
+    background-color: #1e293b;
+    color: white;
+}
+
+.list-group-item {
+    border: none;
+}
+
+/* Post Form */
+.container {
+    background: white;
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #1e40af; /* Deep blue */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input, form textarea {
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+form button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1e40af;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background-color: #010b17;
+}
+
+/* Post Display - Horizontal Layout */
+.posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 4 per row */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+
+}
+
+.post-card {
+    background: #f7f9fb; /* Dark navy */
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 280px;
+    text-align: center;
+    transition: 0.3s;
+    color: white;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+}
+
+.post-card h3 {
+    color: #000203;
+}
+
+.post-card p {
+    font-size: 14px;
+    color: #00060e;
+}
+.post-card img {
+    width: 250px;
+    height: 300px; /* Fixed height */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #3b4a67;
+}
+
+.like-btn, .comment-btn {
+    background: none;
+    border: none;
+    color: #1b4d8e;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+.like-btn i {
+    font-size: 20px;
+    color: #031329; /* Light blue (default color) */
+    transition: color 0.3s ease-in-out;
+}
+
+.like-btn.liked i {
+    color: #e11d48 !important; /* Pastel Red (Heart Color) */
+}
+
+
+/* Comment Box */
+.comment-section {
+    display: none; /* Initially hidden */
+    padding: 10px;
+    text-align: left;
+    border-top: 1px solid #3b4a67;
+}
+
+.comment-section input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #3b4a67;
+}
+
+.comment-section button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #60a5fa;
+    color: white;
+    cursor: pointer;
+}

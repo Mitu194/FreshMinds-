@@ -1,0 +1,182 @@
+        {% load static %}
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>FreshMinds</title>
+            <link href="/static/css/first.css?{% now " U" %}" rel="stylesheet">
+            <!--font awesome-->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+                integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <!-- Bootstrap CSS -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        </head>
+
+        <body>
+            <header>
+                <div class="navbar">
+                    <div class="logo">
+                        <img src="/static/logo copy.png" alt="Logo">
+                        FreshMinds
+                    </div>
+                    <nav>
+                        <a href="/agency_home">Home</a>
+                        <a href="/home_agency">Find job</a>
+                        <a href="/interview_agency">Hiring</a>
+                        <a href="/Job_post_agency">Post Job</a>
+                    </nav>
+                    <div class="user-profile">
+                        <p>{{ agency.city }}, {{ agency.city.state }}</p>
+                        <div class="user-avatar">
+                            
+                    <a href="/agency_profile"><img src="{{ agency.logo.url }}" alt="User Profile"></a>
+                        </div>
+                        <button type="button" class="btn btn-dark bg-black" data-bs-toggle="modal"
+                            data-bs-target="#settingsModal">
+                            <i class="fa-solid fa-gear fs-5" style="color: #ffffff;"></i>
+                        </button>
+
+                    </div>
+                </div>
+                    <form method="GET" action="{% url 'home_agency' %}">
+                        <div class="filters">
+                            <div class="filter-item">
+                                <label for="location">Work Location</label>
+                                <select id="location" name="location">
+                                    <option>--Select location--</option>
+                                    {% for city in cities %}
+                                    <option value="{{ city.id }}" {% if selected_location|stringformat:"s" == city.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ city.cityname }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+            
+                            <div class="filter-item">
+                                <label for="experience">Experience</label>
+                                <select id="experience" name="experience">
+                                    <option>--Select experience--</option>
+                                    <option value="0 - 3 years" {% if selected_experience == "0 - 3 years" %}selected{% endif %}>0 - 3 years</option>
+                                    <option value="4 - 7 years" {% if selected_experience == "4 - 7 years" %}selected{% endif %}>4 - 7 years</option>
+                                    <option value="8 - 10 years" {% if selected_experience == "8 - 10 years" %}selected{% endif %}>8 - 10 years</option>
+                                    <option value="More than 10 years" {% if selected_experience == "More than 10 years" %}selected{% endif %}>More than 10 years</option>
+                                </select>
+                            </div>
+            
+                            <div class="filter-item">
+                                <label for="jobtype">Job type</label>
+                                <select id="jobtype" name="jobtype">
+                                    <option>--Select Job type--</option>
+                                    <option value="full-time" {% if 'full-time' in selected_jobtypes %}selected{% endif %}>Full Time</option>
+                                    <option value="part-time" {% if 'part-time' in selected_jobtypes %}selected{% endif %}>Part Time</option>
+                                    <option value="internship" {% if 'internship' in selected_jobtypes %}selected{% endif %}>
+                                        Internship</option>
+                                </select>
+            
+                            </div>
+                            <div class="filter-item">
+                                <label for="position">Position</label>
+                                <select id="position" name="position">
+                                    <option>--Select Position--</option>
+                                    <option value="Developer" {% if selected_position == "Developer" %}selected{% endif %}>Developer</option>
+                                    <option value="Designer" {% if selected_position == "Designer" %}selected{% endif %}>Designer</option>
+                                </select>
+                            </div>
+                            <button type="submit" id="filterBtn" class="btn btn-secondary">Apply Filters</button>
+                        </div>
+                        </form>
+            </header>
+            <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-dark">
+                            <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body bg-dark">
+                            <ul class="list-group bg-dark">
+                       
+                                <li class="list-group-item bg-dark">
+                                    <a href="/" class="text-decoration-none text-danger">Log Out</a>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <a href="/forgot-password" class="text-decoration-none text-danger">Forgot Password</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer bg-dark">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">&nbsp;&nbsp;Close&nbsp;&nbsp;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+            <main id="main">
+                <section class="job-overview">
+                    <div class="job-list">
+                        {% for job in jobs %}
+                    
+                        <div class="job-card {{job.color}}">
+                            <div class="job-header">
+                                <span class="date">{{job.posted_date}}</span>
+                            </div>
+                            <h3>{{job.position}}</h3>
+                            {% if job.agency.logo.url %}
+                                <p><strong><img src="{{job.agency.logo.url}}" alt="Company Logo" class="company-logo"/>&nbsp; {{job.cmpname}}</strong></p>
+                            {% else %}
+                                <p><strong><img src="{{job.organization.logo.url}}" alt="Company Logo" class="company-logo"/>&nbsp; {{job.cmpname}}</strong></p>
+                            {% endif %}
+                            <div class="tags">
+                                <span class="tag">{{ job.jobtype }}</span>
+                                <span class="tag">{{ job.cmpname }}</span>
+                                <span class="tag">{{ job.requiredexperience }}</span>
+                            </div>
+                            <p class="location">{{ job.city }}, {{ job.city.state }}</p>
+                            <a style="text-decoration: none;" href="/job_details_agency?jobid={{job.id}}"><button class="details-btn">Details</button></a>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </section>
+            </main>
+            <hr class="horizontal">
+            <br>
+            <div class="row1">
+                <h3>Contact us</h3>
+                <i class="fa-solid fa-location-dot" style="color: #ffffff;">
+                    <p class="prg">&nbsp;Location</p>
+                </i><br>
+                <i class="fa-solid fa-phone" style="color: #ffffff;">
+                    <p class="prg">&nbsp;FM Office :- +91 1234 560 789</p>
+                </i><br>
+                <i class="fa-solid fa-envelope" style="color: #ffffff;">
+                    <p class="prg">&nbsp;freshminds123@gmail.com</p>
+                </i><br>
+                <i class="fa-solid fa-phone-volume" style="color: #ffffff;">
+                    <p class="prg">&nbsp;Helpline number :- +91 6745 238 976</p>
+                </i><br>
+                <i class="fa-solid fa-envelope" style="color: #ffffff;">
+                    <p class="prg">&nbsp;freshminds.ac.in</p>
+                </i>
+            </div>
+            <div class="row2">
+                <i class="fa-brands fa-facebook fb" style="color: #ffffff;"></i>
+                <i class="fa-brands fa-youtube fb" style="color: #ffffff;"></i>
+                <i class="fa-brands fa-x-twitter fb" style="color: #ffffff;"></i>
+                <i class="fa-brands fa-instagram fb" style="color: #ffffff;"></i>
+                <i class="fa-brands fa-linkedin fb" style="color: #ffffff;"></i>
+            </div>
+            <script src="{% static 'js/firstpage.js' %}" defer></script>
+        </body>
+        <!--Bootstrap Js link-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        </html>

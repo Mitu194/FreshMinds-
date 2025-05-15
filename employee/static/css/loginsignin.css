@@ -1,0 +1,207 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+.header{
+  display: flex;
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  position: sticky;
+  top:0;
+  z-index: 99;
+}
+nav h2{
+  margin-left: 0;
+  font-weight:bolder;
+  font-size: 30px;
+  color: #333333;
+}
+nav {
+  display: flex;
+  gap:20px;
+  align-items: center;
+}
+.logo{
+height: 40px;
+  margin-top: -2px;
+}
+
+.container {
+  display: flex;
+  width: 70%; /* Adjust the width as needed */
+  max-width: 1200px; /* Optional: Limit the container's width */
+  height: 80vh; /* Height of the container */
+  background-color: white;
+  box-shadow: 0 0 20px #9c9c9c, 0 0 10px #9c9c9c;
+  background-image: url("file:///C:/Users/gosai/OneDrive/Documents/OneDrive/Desktop/SDP%20Project/Developing/left%20img2.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  margin-top: 20px;
+  animation: fadeIn 1s ease-in-out forwards; /* Fade-in animation */
+}
+/* Define the keyframes for the fade-in animation */
+@keyframes fadeIn {
+  0% {
+      opacity: 0; /* Fully transparent at the start */
+  }
+  100% {
+      opacity: 1; /* Fully opaque at the end */
+  }
+}
+
+.left {
+  width: 55%;
+  flex: 1;
+  height: 100%;
+  padding: 30px;
+}
+
+.right {
+  width: 45%;
+  padding: 50px;
+  /* display: flex; /* Hides overflow on the horizontal axis, but not on the vertical */
+  /*overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 300px;
+  flex-direction: column; */
+  justify-content: center;
+  background-color: #0962c7;
+}
+
+.name{
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  width: 46%;
+  border: none;
+  border-bottom: 2px solid #000; /* Solid bottom line */
+  outline: none; /* Removes the default outline when focused */
+  transition: border-color 0.3s ease; /* Smooth transition for focus effect */
+}
+.name:focus{
+  border-bottom: 2px solid #0962c7; /* Changes color when focused */
+}
+.name1{
+  margin-left: 7%;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  width: 46%;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #000; /* Solid bottom line */
+  outline: none; /* Removes the default outline when focused */
+  transition: border-color 0.3s ease; /* Smooth transition for focus effect */
+}
+.name1:focus{
+  border-bottom: 2px solid #0962c7; /* Changes color when focused */
+}
+/*email*/
+.solid-line-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #000; /* Solid bottom line */
+  outline: none; /* Removes the default outline when focused */
+  transition: border-color 0.3s ease; /* Smooth transition for focus effect */
+}
+
+.solid-line-input:focus {
+  border-bottom: 2px solid #0962c7; /* Changes color when focused */
+}
+/*dropdown*/
+select {
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #000; /* Underline style */
+  padding: 8px 0;
+  font-size: 14px;
+  outline: none;
+  width: 12%;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+select option {
+  color: #333;
+}
+/*contact number*/
+.solid-line-contact {
+  width: 85%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  margin-left: 12px;
+  border-bottom: 2px solid #000; /* Solid bottom line */
+  outline: none; /* Removes the default outline when focused */
+  transition: border-color 0.3s ease; /* Smooth transition for focus effect */
+}
+
+.solid-line-contact:focus {
+  border-bottom: 2px solid #0962c7; /* Changes color when focused */
+}
+.terms{
+  color: #0962c7;
+  text-decoration: underline;
+}
+.paragraphs{
+  text-align: center;
+  margin-top: 50px;
+}
+.button1{
+  background-color: #0962c7;
+  color: white;
+  height: 8%;
+  width: 60%;
+  border: 2px solid #0962c7;
+  border-radius: 10px;
+  margin-left: 120px;
+  margin-top: 20px;
+}
+.other{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  margin-top: 70px;
+  margin-bottom: 40px;
+}
+button p{
+  display: inline;
+  /* margin-right: 80px; */
+}
+.icons{
+  width: 70%;
+  height: 8%;
+  margin-bottom: 30px;
+  background-color: white;
+  border: 2px solid #0962c7;
+  border-radius: 10px;
+  margin-left: 16%;
+}
+button i{
+  font-size: 20px;
+  text-align: left;
+  margin-right: 25px;
+}
+.link,a{
+  color: white !important;
+  text-align: center;
+  margin-top: 120px;
+}
+a:hover{
+  color: black !important;
+}
+button a{
+  text-decoration: none;
+}

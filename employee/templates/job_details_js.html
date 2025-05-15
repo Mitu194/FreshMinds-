@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Detail Page</title>
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/firstpage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="/static/css/job_detail.css?{% now " U" %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="/static/logo copy.png" alt="Logo">
+                FreshMinds
+            </div>
+            <nav>
+                <a href="/home_js">Home</a>
+                <a href="/job_seeker">Find job</a>
+                <a href="#">Applied Jobs</a>
+            </nav>
+            <div class="user-profile">
+                <p>{{ member.city }}, {{ member.city.state }}</p>
+                <div class="user-avatar">
+                  <a href="/cv"><img src= {{member.profile.url}} alt="User Profile"></a>
+                </div>
+                <button type="button" class="btn btn-dark bg-black" data-bs-toggle="modal"
+                    data-bs-target="#settingsModal">
+                    <i class="fa-solid fa-gear fs-5" style="color: #ffffff;"></i>
+                </button>
+
+            </div>
+        </div>
+        <div class="filters">
+            <div class="filter-item">
+                <label class="srch1">Search</label>
+                <input type="search" id="search1" class="search1" placeholder="Search...">
+            </div>
+            <div class="filter-item">
+                <label for="location">Work Location</label>
+                <select id="location">
+                    <option>--Select location--</option>
+                    {% for city in cities %}
+                 <option value="{{ city.id }}">{{ city.cityname }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="experience">Experience</label>
+                <select id="experience">
+                    <option>--Select experience--</option>
+                    <option>0 - 3 years</option>
+                    <option>4 - 7 years</option>
+                    <option>8 - 10 years</option>
+                    <option>More than 10 years</option>
+
+                </select>
+            </div>
+            <div class="filter-item">
+                <input type="range" min="1200" max="20000" value="5000" id="slider">
+                <p>&#x20A8; 1200 - &#x20A8; <span id="demo"></span></p>
+            </div>
+        </div>
+    </header>
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <ul class="list-group bg-dark">
+                        <li class="list-group-item bg-dark">
+                            <a href="#" class="text-decoration-none text-light">Edit Profile</a>
+                        </li>
+                        <li class="list-group-item bg-dark">
+                            <a href="#" class="text-decoration-none text-light">Create CV</a>
+                        </li>
+                        <li class="list-group-item bg-dark">
+                            <a href="/" class="text-decoration-none text-danger">Log Out</a>
+                        </li>
+                        <li class="list-group-item bg-dark">
+                            <a href="/changepassword" class="text-decoration-none text-danger">Change Password</a>
+                        </li>
+                        <li class="list-group-item bg-dark">
+                            <a href="/forgetpassword" class="text-decoration-none text-danger">Forgot Password</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">&nbsp;&nbsp;Close&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="company-header">
+            {% if job.agency %}
+                <img src="{{ job.agency.logo.url }}" alt="Agency Logo" class="company-logo">
+            {% else %}
+                <img src="{{ job.organization.logo.url }}" alt="Organization Logo" class="company-logo">
+            {% endif %}
+            
+            <h1>{{job.cmpname}}</h1>
+        </div>
+        <h2>{{job.position}}</h2>
+        <div class="job-info">
+            <p><strong>Company:</strong>{{job.organization}}</p>
+            <p><strong>Job type:</strong>{{job.jobtype}}</p>
+            <p><strong>Location:</strong>{{job.city}}</p>     
+            <p><strong>Apply Date:</strong>{{job.applystartdate}} - {{job.lastdate}} </p>
+            <p><strong>Skills Required:</strong>{{job.skillsrequired}}</p>
+        </div>
+        <div class="about-job">
+            <h2>About the Job</h2>
+            <p>{{job.jobdescription}}
+            </p>
+            <p><strong>Skills Required:</strong><br/>{{job.skillsrequired}}</p>
+            <p><strong>Required Qualification:</strong><br/>{{job.requiredqualification}}</p>
+            <p><strong>Required Experience:</strong><br/>{{job.requiredexperience}} years</p>
+        </div>
+        <a href="/apply?jobid={{job.id}}" class="apply-btn" onclick="applyJob()">Apply Now</a>
+    </div>
+    
+    <script>
+        function applyJob() {
+            alert("Your application has been submitted!");
+        }
+    </script>
+</body>
+</html>

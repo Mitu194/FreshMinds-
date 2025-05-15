@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job description</title>
+    <link href="/static/css/Post_job.css?{% now "U" %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="/static/logo copy.png" alt="Logo">
+                FreshMinds
+            </div>
+            <nav>   
+                <a href="/home">Home</a>
+                <a href="/firstpage">Find job</a>
+                <a href="/interview">Hiring</a>
+                <a href="/Job_Post">Post Job</a>
+            </nav>
+            <div class="user-profile">
+                <p>{{ organization.city }}, {{ organization.state }}</p>
+                <div class="user-avatar">
+                    <a href="/company_home"><img src="{{ organization.logo.url }}" alt="User Profile"></a>
+                </div>
+                <button type="button" class="btn btn-dark bg-black" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                <i class="fa-solid fa-gear fs-5" style="color: #ffffff;"></i>
+                </button> 
+            </div>
+        </div>
+        </header>
+        <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header bg-dark">
+                  <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <ul class="list-group bg-dark">
+                       
+                        <li class="list-group-item bg-dark">
+                            <a href="/" class="text-decoration-none text-danger">Log Out</a>
+                        </li>
+                        <li class="list-group-item bg-dark">
+                            <a href="/forgot-password" class="text-decoration-none text-danger">Forgot Password</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer bg-dark">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">&nbsp;&nbsp;Close&nbsp;&nbsp;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    <div class="container">
+        <h2>Review job description</h2>
+        <form id="jobForm" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Post Job</button>
+        </form>
+           <!-- <div class="job-details">
+                <label for="job-title">Job Title</label>
+                <input type="text" id="position" name="position" placeholder="Web Designer" required minlength="3">
+                <span id="titleError" class="error">Job title is required and should be at least 3 characters long.</span>
+
+                <label for="company">Company</label>
+                <input type="text" id="cmpname" name="cmpname" required minlength="3">
+                <span id="companyError" class="error">Company name is required and should be at least 3 characters long.</span>
+
+                <label for="workplace">Workplace Type</label>
+                <select id="jobtype" name="jobtype" required>
+                    <option value="">Select an option</option>
+                    <option value="on-site">On-site</option>
+                    <option value="remote">Remote</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
+                <span id="workplaceError" class="error">Workplace type is required.</span>
+
+                <label for="location">Job Location</label>
+                <input type="text" id="city" name="city" value="Gandhinagar, Gujarat, India" required>
+                <span id="locationError" class="error">Location is required and should be at least 3 characters long.</span>
+
+            <div class="description">
+                <label for="description">Description</label>
+                <textarea id="jobdescription" name="jobdescription" required minlength="10">Company Description</textarea>
+                <span id="descriptionError" class="error">Description is required and should be at least 10 characters long.</span>
+            </div>
+            <div class="skills-container">
+                <label for="skill-input">Skills</label>
+                <input type="text" id="skillsrequired" name="skillsrequired" placeholder="Add skill" maxlength="50">
+            </div>
+
+            <div class="apply-date">
+                <label for="apply-date">Apply Date</label>
+                <input type="date" id="applystartdate" name="applystartdate" placeholder="Start Date"/>
+            </div>
+
+            <div class="end-date">
+                <label for="end-date">End Date</label>
+                <input type="date" id="lastdate" name="lastdate" placeholder="End Date"/>
+            </div>
+
+            <div class="experience-container">
+                <label for="experience-input">Required Experience</label>
+                <input type="text" id="requiredexperience" name="requiredexperience" placeholder="Add Experience" maxlength="50">
+            </div>
+
+            <div class="qualification-container">
+                <label for="qualification-input">Required Experience</label>
+                <input type="text" id="requiredqualification" name="requiredqualification" placeholder="Add Qualification" maxlength="50">
+            </div>
+
+            <div class="vacany-container">
+                <label for="vacancy-input">Required Experience</label>
+                <input type="number" id="noofvacancies" name="noofvacancies" placeholder="Add vacancy" maxlength="50">
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary"><a href="/firstpage">Submit</a></button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Validation function to check field values
+        function validateField(field, errorField, minLength = 0) {
+            if (field.value.trim() === '' || field.value.trim().length < minLength) {
+                document.getElementById(errorField).style.display = 'block';
+                return false;
+            } else {
+                document.getElementById(errorField).style.display = 'none';
+                return true;
+            }
+        }
+
+        document.getElementById('jobForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting immediately
+
+            let isValid = true;
+
+            // Validate each field
+            isValid &= validateField(document.getElementById('job-title'), 'titleError', 3);
+            isValid &= validateField(document.getElementById('company'), 'companyError', 3);
+            isValid &= validateField(document.getElementById('location'), 'locationError', 3);
+            isValid &= validateField(document.getElementById('description'), 'descriptionError', 10);
+            isValid &= validateField(document.getElementById('workplace'), 'workplaceError');
+            isValid &= validateField(document.getElementById('job-type'), 'jobTypeError');
+
+            if (isValid) {
+                // If the form is valid, show an alert and reset the form
+                alert('Job description submitted successfully!');
+                document.getElementById('jobForm').reset();
+            }
+        });
+
+        // Add live validation as the user types or changes fields
+        document.getElementById('job-title').addEventListener('input', function() {
+            validateField(this, 'titleError', 3);
+        });
+
+        document.getElementById('company').addEventListener('input', function() {
+            validateField(this, 'companyError', 3);
+        });
+
+        document.getElementById('location').addEventListener('input', function() {
+            validateField(this, 'locationError', 3);
+        });
+
+        document.getElementById('description').addEventListener('input', function() {
+            validateField(this, 'descriptionError', 10);
+        });
+
+        document.getElementById('workplace').addEventListener('change', function() {
+            validateField(this, 'workplaceError');
+        });
+
+        document.getElementById('job-type').addEventListener('change', function() {
+            validateField(this, 'jobTypeError');
+        });
+        const skillInput = document.getElementById('skill-input');
+        const skillTags = document.getElementById('skill-tags');
+        const addSkillBtn = document.getElementById('add-skill-btn');
+        let skills = ['Web Design', 'jQuery', 'Cascading Style Sheets (CSS)', 'HTML', 'JavaScript', 'Landing Pages', 'WordPress Design', 'User Interface Design', 'User Experience Design (UED)', 'Web Development'];
+
+        // Function to display skills
+        function displaySkills() {
+            skillTags.innerHTML = '';
+            skills.forEach((skill, index) => {
+                const skillTag = document.createElement('div');
+                skillTag.classList.add('tag');
+                skillTag.innerHTML = `${skill} <span class="remove-skill" onclick="removeSkill(${index})">&times;</span>`;
+                skillTags.appendChild(skillTag);
+            });
+        }
+
+        // Function to remove a skill
+        function removeSkill(index) {
+            skills.splice(index, 1);
+            displaySkills();
+        }
+
+        // Function to add a skill
+        addSkillBtn.addEventListener('click', function () {
+            const newSkill = skillInput.value.trim();
+            if (newSkill && skills.length < 10 && !skills.includes(newSkill)) {
+                skills.push(newSkill);
+                skillInput.value = '';
+                displaySkills();
+            } else if (skills.length >= 10) {
+                alert("You can only add up to 10 skills.");
+            } else if (skills.includes(newSkill)) {
+                alert("This skill is already added.");
+            }
+        });
+
+        // Display initial skills on page load
+        displaySkills();
+    </script>
+    <script src="/static/js/firstpage.js"></script>
+</body>
+</html>-->

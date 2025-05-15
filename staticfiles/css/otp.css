@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+.header{
+    display: flex;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    position: sticky;
+    top:0;
+    z-index: 99;
+}
+nav h2{
+    margin-left: 0;
+    font-weight:bolder;
+    font-size: 30px;
+    color: #333333;
+}
+nav {
+    display: flex;
+    gap:20px;
+    align-items: center;
+}
+.logo{
+	height: 40px;
+    margin-top: -2px;
+}
+body {
+    font-family: 'Dubai';
+    color: #333;
+    opacity: 0; 
+    animation: fadeIn 2s ease-in-out forwards;
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Fully transparent at the start */
+    }
+    100% {
+        opacity: 1; /* Fully opaque at the end */
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+p span{
+    opacity: 0.7;
+}
+
+h1 {
+    text-align: center;
+}
+
+.button2 {
+    height: 60px;
+    width: 60px;
+    background-color: #0962c7;
+    border: 2px solid #0962c7;
+    font-size: 35px;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    margin-left: 40%;
+}
+.otp-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.otp-input {
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  text-align: center;
+  border: 2px solid #0962c7;
+  border-radius: 12px;
+  outline: none;
+}
+
+.otp-input:focus {
+  border-color: #000;
+}
+
+a {
+  color: #0962c7;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+.button1{
+    margin-top: 30px;
+}

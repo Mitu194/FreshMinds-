@@ -1,0 +1,108 @@
+{% block content %}
+    <div class="custom-login-container">
+        <img src="/static/logo.png">
+        <strong>FreshMinds</strong>
+        <h2>Welcome to Admin</h2>
+        
+        <form method="post" action="{% url 'admin:login' %}">
+            {% csrf_token %}
+            
+            <div class="input-group">
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" id="id_username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="id_password">Password:</label>
+                <input type="password" name="password" id="id_password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+            
+            <div class="pass">
+                <button class="link-btn"><a href="/forgot-password">Forgot Password</a></button>
+                <button class="link-btn"><a href="/reset-password">Reset Password</a></button>
+            </div>
+        </form>
+
+        {% if form.errors %}
+            <p class="error-msg">Invalid username or password. Try again.</p>
+        {% endif %}
+    </div>
+
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .custom-login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+        .pass {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .link-btn {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .link-btn a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+        }
+        .link-btn a:hover {
+            text-decoration: underline;
+        }
+        .error-msg {
+            color: red;
+            margin-top: 15px;
+        }
+        img{
+            width: 15%;
+            display: block;
+            margin-left: 42%;
+        }
+    </style>
+{% endblock %}

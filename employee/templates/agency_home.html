@@ -1,0 +1,190 @@
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="/static/css/home.css?{% now " U" %}" rel="stylesheet">
+  <script src="/static/js/home.js"></script>
+  <!--bootstrap css-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!--bootstrap js-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!--font awesome cdn-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="/static/logo copy.png" alt="Logo">
+                FreshMinds
+            </div>
+            <nav>
+                <a href="/agency_home">Home</a>
+                <a href="/home_agency">Find job</a>
+                <a href="/interview_agency">Hiring</a>
+                <a href="/Job_post_agency">Post Job</a>
+            </nav>
+            <div class="user-profile">
+                <p>{{ agency.city }}, {{ agency.city.state }}</p>
+                <div class="user-avatar">
+                    <a href="/agency_profile"><img src="{{ agency.logo.url }}" alt="User Profile"></a>
+                </div>
+                <button type="button" class="btn btn-dark bg-black" data-bs-toggle="modal"
+                    data-bs-target="#settingsModal">
+                    <i class="fa-solid fa-gear fs-5" style="color: #ffffff;"></i>
+                </button>
+
+            </div>
+        </div>
+    </header>
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-dark">
+                  <ul class="list-group bg-dark">
+                       
+                    <li class="list-group-item bg-dark">
+                        <a href="/" class="text-decoration-none text-danger">Log Out</a>
+                    </li>
+                    <li class="list-group-item bg-dark">
+                        <a href="/forgot-password" class="text-decoration-none text-danger">Forgot Password</a>
+                    </li>
+                </ul>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">&nbsp;&nbsp;Close&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="main">
+      <div id="root"></div>
+  <div class="sidebar div1">
+    <div class="filter-section" style="width: 28%; margin-right: 15%; margin-left: 4%;"">
+      <div class="profile">
+        <img src="{{ agency.logo.url }}">
+        <br/>
+        <h5 class="hd5">@{{ agency.cmpname }}</h5>
+      </div>
+      <hr>
+      <div class="filter-group">
+        <h6>Website:</h6> <p>{{ agency.website }}</p><hr>
+        <h6>Contact:</h6> <p>{{ agency.strmobileno }} <br/> {{ agency.login.email }}</p><hr>
+        <h6>Address:</h6> <p>{{ agency.address }}</p> <hr>
+      </div>
+    </div>
+  </div>
+  <div class="body1 div1" style="width: 50%; margin-left: 35%;">
+    <h2>Feeds</h2>
+    {% for post in posts %}
+<div class="card">
+  <div class="card-header">
+    <a class="prg1" href="{% url 'user_profile_view' username=post.login.username %}">@{{ post.login.first_name }}</a>
+  </div>
+  <div class="card-body open-popup-btn" data-post-id="{{ post.id }}">
+    <div class="description">
+      <p>{{ post.postdesc }}</p>
+    </div>
+    <hr class="line1">
+    <div class="postimg">
+      <img src="{{ post.postcontent.url }}" class="imgs1">
+    </div>
+  </div>
+</div>
+
+<!-- Popup -->
+<div class="overlay" id="overlay-{{ post.id }}"></div>
+<div class="popup" id="popup-{{ post.id }}">
+  <div class="popup-content">
+    <span class="close-btn" data-post-id="{{ post.id }}">&times;</span>
+    <div class="image-section">
+      <img src="{{ post.postcontent.url }}" alt="Image">
+      <div class="nav-buttons">
+        {% if user.is_authenticated %}
+        <form action="{% url 'like_post' post.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" style="border: none;">❤️</button>
+        </form>
+        {% endif %}
+        <p style="margin-top: 3%;">{{ post.like_count }}</p>
+      </div>
+    </div>
+
+    <div class="text-section">
+      <p class="paragraph1">{{ post.posttitle }}</p>
+      <div class="comments">
+        <h3>Comments:</h3>
+        <ul>
+          {% for comment in comments_by_post|get_item:post.id %}
+          <div class="comment">
+            <p>
+              <strong>{{ comment.login.first_name }}</strong> 
+              <small>({{ comment.commentsdate }})</small>: 
+              {{ comment.comments }}
+              {% if comment.login == request.user %}
+              <form action="{% url 'delete_comment' comment.id %}" method="post" onsubmit="return confirm('Are you sure?')">
+                {% csrf_token %}
+                <button type="submit" class="button-styled" style="background: crimson;">Delete</button>
+              </form>
+              {% endif %}
+            </p>
+          </div>
+          {% empty %}
+          <p>No comments yet. Be the first to speak your truth 🔥</p>
+          {% endfor %}
+  </ul>
+            </div>
+            <div class="add_comment">
+            {% if user.is_authenticated %}
+              <form method="post" action="{% url 'add_comment' post.id %}" style="margin-left: 12%;">
+                {% csrf_token %}
+                <textarea name="comment" placeholder="Say something nice..." class="custom-textarea" id="comment" required style="border-radius: 5%;"></textarea>
+                <br>
+                <button type="submit" class="button-styled">Post Comment</button>
+              </form>
+            {% else %}
+              <p><a href="{% url 'login' %}">Log in</a> to leave a comment.</p>
+            {% endif %}
+          </div>
+            
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+</div>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // OPEN popup
+    document.querySelectorAll(".open-popup-btn").forEach(btn => {
+      btn.addEventListener("click", function () {
+        const postId = this.getAttribute("data-post-id");
+        document.getElementById("popup-" + postId).style.display = "flex";
+        document.getElementById("overlay-" + postId).style.display = "block";
+      });
+    });
+
+    // CLOSE popup
+    document.querySelectorAll(".close-btn").forEach(btn => {
+      btn.addEventListener("click", function () {
+        const postId = this.getAttribute("data-post-id");
+        document.getElementById("popup-" + postId).style.display = "none";
+        document.getElementById("overlay-" + postId).style.display = "none";
+      });
+    });
+  });
+</script>
+
+</html>

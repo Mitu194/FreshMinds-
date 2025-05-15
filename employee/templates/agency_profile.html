@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Microsoft LinkedIn Page Clone</title>
+    <link rel="stylesheet" href="/static/css/company_home.css?{% now "U" %}">
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--Font awesome cdn js-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+                <img src="/static/logo copy.png" alt="LuckyJob Logo">
+                FreshMinds
+            </div>
+            <nav>
+                <a href="/agency_home">Home</a>
+                <a href="/home_agency">Find job</a>
+                <a href="/interview_agency">Hiring</a>
+                <a href="/Job_post_agency">Post Job</a>
+              </nav>
+              <div class="user-profile">
+                <p>{{ agency.city }}, {{ agency.city.state }}</p>
+                <div class="user-avatar">
+                  <a href="/agency_profile"><img src="{{ agency.logo.url }}" alt="User Profile"></a>
+                
+                </div>
+                <button type="button" class="btn btn-dark bg-black" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fa-solid fa-gear fs-5" style="color: #ffffff;"></i>
+                </button>
+                <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header bg-dark">
+                          <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body bg-dark">
+                          <ul class="list-group bg-dark">
+                            <li class="list-group-item bg-dark">
+                              <a href="#" class="text-decoration-none text-light">Edit Profile</a>
+                            </li>
+                            <li class="list-group-item bg-dark">
+                              <a href="#" class="text-decoration-none text-light">Create CV</a>
+                            </li>
+                            <li class="list-group-item bg-dark">
+                              <a href="#" class="text-decoration-none text-danger">Log Out</a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="modal-footer bg-dark">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">&nbsp;&nbsp;Close&nbsp;&nbsp;</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        
+    </header>
+
+
+    
+    <!-- Header Section -->
+    <header class="header1">
+        <img src="{{ agency.logo.url }}" alt="Logo" class="logo">
+        <div class="header-content">
+            <h1>{{ agency.cmpname }}</h1>
+            <p>{{ agency.address }} </p>
+            
+            
+        </div>
+</header>
+<script>
+  const button = document.querySelector(".follow-button");
+  let isFollowing = false;
+
+  button.addEventListener("click", () => {
+    isFollowing = !isFollowing;
+    button.textContent = isFollowing ? "Following" : "Follow";
+    button.style.backgroundColor = isFollowing ? " #0a66c2" : " #0a66c2";
+  });
+</script>
+
+<style>
+  .follow-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color:  #0a66c2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+</style>
+
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+        <a href="/agency_profile" class="tab active" onclick="showSection('home')">Home</a>
+        <a href="/agency_post" class="tab" onclick="showSection('posts')">Posts</a>
+        <a href="/agency_job" class="tab" onclick="showSection('jobs')">Jobs</a>
+    </nav>
+
+    <!-- Content Sections -->
+    <section id="home" class="content-section active">
+        <h2>Welcome to {{ agency.cmpname }}</h2>
+        <p>This is the Home section, where we share the latest news and highlights about our company.</p>
+        
+
+<!-- Overview Modal -->
+<div class="modal fade" id="overviewModal" tabindex="-1" aria-labelledby="overviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">        
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="overviewModalLabel">Edit Overview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="overviewForm">
+                    {% csrf_token %}
+                    {{ overview_form.as_p }}  <!-- Render form fields -->
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>  
+
+<div class="overview-card ">
+    <h3>Overview</h3>
+    <p id="overviewText"> {{ overview.overview }}</p>  <!-- Display Overview -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#overviewModal">
+        Edit Overview
+    </button>
+</div>
+
+            
+            <div class="overview-details">
+                <div class="info-box">
+                    <strong>Contact info</strong><br>
+                    <a href="https://news.microsoft.com/" target="_blank">{{ agency.website }}</a>
+                    <hr/>
+                    <h6>Mobile No.</h6><p>{{ agency.strmobileno }}</p>
+                    <hr/>
+                    <h6>Email:</h6><p>{{ agency.login.email }}</p>
+                    <hr/>
+                    <h6>Address</h6><p>{{ agency.address }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="content-section">
+        <h2>About Microsoft</h2>
+        <p>Microsoft is a global technology company based in Redmond, Washington, focused on software, services, devices, and solutions.</p>
+    </section>
+
+    <section id="posts" class="content-section">
+        <h2>Posts</h2>
+        <p>Curious about the newest AI features designed to support you at work and beyond? October's edition of The Monthly Tech-In has got you covered.</p>
+    </section>
+
+    <section id="jobs" class="content-section">
+        <h2>Jobs</h2>
+        <p>Explore job opportunities and career paths at Microsoft.</p>
+    </section>
+
+
+    
+    
+    <div class="recent-jobs-card">                                                                                            
+        <h3>Recent job openings</h3>
+        {% if latest_job %}
+        <div class="job-opening">
+            <img src="{{ latest_job.agency.logo.url }}" alt="company logo" class="job-logo">
+            <div>
+                <p>{{ latest_job.position }} <span class="verified-icon">✔️</span></p>
+                <p>{{ latest_job.city }}</p>
+            </div>
+        </div>
+        {% else %}
+        <p>No posts found.</p>
+        {% endif %}
+    <script>
+document.getElementById("overviewForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let overviewText = document.querySelector("#id_overview").value;  // Ensure this is correct
+    
+    fetch("{% url 'update_overview' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: JSON.stringify({ overview: overviewText })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById("overviewText").innerText = data.overview;
+            bootstrap.Modal.getInstance(document.getElementById('overviewModal'));
+        } else {
+            alert("Error: " + data.error);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+</script>    
+    
+    {% load static %}
+</body>
+
+<script src="{% static 'js/company_home.js' %}" defer></script>
+</html>

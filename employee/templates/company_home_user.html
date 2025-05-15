@@ -1,0 +1,326 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Microsoft LinkedIn Page Clone</title>
+    <link rel="stylesheet" href="/static/css/company_home.css?{% now "U" %}">
+    <link rel="stylesheet" href="/static/css/company_post.css?{% now " U" %}">
+    <link rel="stylesheet" href="/static/css/company_job.css?{% now " U" %}">
+    
+    
+    <!--bootstrap js-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--Font awesome cdn js-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script src="/static/js/home.js"></script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+                <img src="/static/logo copy.png" alt="LuckyJob Logo">
+                FreshMinds
+            </div>
+            </div>
+
+        
+    </header>
+
+
+    
+    <!-- Header Section -->
+    <header class="header1">
+        <img src="{{ organization.logo.url }}" alt="Logo" class="logo">
+        <div class="header-content">
+            <h1>{{ organization.cmpname }}</h1>
+            <p>{{ organization.address }} {{ organization.cmp_strength }} employees</p>
+         
+</header>
+<div style="padding: 1%;">
+    {% if user.is_authenticated and user != profile_user %}
+                    {% if is_following %}
+                        <form method="post" action="{% url 'unfollow_user' profile_user.username %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Unfollow</button>
+                        </form>
+                    {% else %}
+                        <form method="post" action="{% url 'follow_user' profile_user.username %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Follow</button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+                <p>
+                    <span class="stat-btn" onclick="toggleSection('followers-list')">{{ followers_count }} Followers</span> |
+                    <span class="stat-btn" onclick="toggleSection('following-list')">{{ following_count }} Following</span>
+                </p>
+                <style>
+                    .stat-btn {
+                        cursor: pointer;
+                        font-weight: bold;
+                        color: #0d6efd;
+                    }
+                    .stat-btn:hover {
+                        text-decoration: underline;
+                    }
+                    .hidden-section {
+                        display: none;
+                        margin-top: 10px;
+                        padding: 10px;
+                        background-color: #f2f2f2;
+                        border-radius: 5px;
+                    }
+                    </style>
+        
+                <div id="followers-list" class="hidden-section">
+                    <h5>Followers</h5>
+                    <ul>
+                        {% for f in followers %}
+                            <li><a href="{% url 'user_profile_view' username=f.follower.username %}">{{ f.follower.username }}</a></li>
+                        {% empty %}
+                            <li>No followers yet.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div id="following-list" class="hidden-section">
+                    <h5>Following</h5>
+                    <ul>
+                        {% for f in following %}
+                            <li><a href="{% url 'user_profile_view' username=f.following.username %}">{{ f.following.username }}</a></li>
+                        {% empty %}
+                            <li>Not following anyone yet.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+</div>
+<script>
+    
+  const button = document.querySelector(".follow-button");
+  let isFollowing = false;
+
+  button.addEventListener("click", () => {
+    isFollowing = !isFollowing;
+    button.textContent = isFollowing ? "Following" : "Follow";
+    button.style.backgroundColor = isFollowing ? " #0a66c2" : " #0a66c2";
+  });
+        function toggleSection(sectionId) {
+            const el = document.getElementById(sectionId);
+            el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+        } 
+</script>
+
+<style>
+  .follow-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color:  #0a66c2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+</style>
+
+
+    <!-- Content Sections -->
+    <section id="home" class="content-section active">
+        <h2>Welcome to {{ organization.cmpname }}</h2>
+        <p>This is the Home section, where we share the latest news and highlights about our company.</p>
+        
+
+
+<div class="overview-card">
+    <h3>Overview</h3>
+    <p id="overviewText"> {{ overview.overview }}</p>  <!-- Display Overview -->
+</div>
+
+            
+            <div class="overview-details">
+                <div class="info-box">
+                    <strong>Contact info</strong><br>
+                    <a href="https://news.microsoft.com/" target="_blank">{{ organization.website }}</a>
+                    <hr/>
+                    <h6>Mobile No.</h6><p>{{ organization.strmobileno }}</p>
+                    <hr/>
+                    <h6>Email:</h6><p>{{ organization.login.email }}</p>
+                    <hr/>
+                    <h6>Address</h6><p>{{ organization.address }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="content-section">
+        <h2>About Microsoft</h2>
+        <p>Microsoft is a global technology company based in Redmond, Washington, focused on software, services, devices, and solutions.</p>
+    </section>
+
+    <section id="posts" class="content-section">
+        <h2>Posts</h2>
+        <p>Curious about the newest AI features designed to support you at work and beyond? October's edition of The Monthly Tech-In has got you covered.</p>
+    </section>
+
+    <section id="jobs" class="content-section">
+        <h2>Jobs</h2>
+        <p>Explore job opportunities and career paths at Microsoft.</p>
+    </section>
+
+    {% for post in posts %}
+  <div class="card">
+
+    <!-- Card Header -->
+    <div class="card-header">
+      <a class="prg1" href="{% url 'user_profile_view' username=post.login.username %}">
+        @{{ post.login.first_name }}
+      </a>
+    </div>
+
+    <!-- Post Body -->
+    <div class="card-body">
+      <div class="description">
+        <p>{{ post.postdesc }}</p>
+      </div>
+      <hr class="line1">
+      <div class="postimg">
+        <img src="{{ post.postcontent.url }}" class="imgs1">
+      </div>
+    </div>
+
+    <!-- Like Section -->
+    <div class="like-section" style="margin-left: 15px; margin-top: 10px;">
+      {% if user.is_authenticated %}
+        <form action="{% url 'like_post' post.id %}" method="post" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" style="border: none; background: none;">❤️</button>
+        </form>
+      {% endif %}
+      <span>{{ post.like_count }} likes</span>
+    </div>
+
+    <!-- Post Title -->
+    <div class="post-title" style="margin: 10px 15px;">
+      <strong>{{ post.posttitle }}</strong>
+    </div>
+
+    <!-- Comments -->
+    <div class="comments" style="margin: 10px 15px;">
+      <h4>Comments:</h4>
+      <ul>
+        {% for comment in comments_by_post|get_item:post.id %}
+          <li>
+            <strong>{{ comment.login.first_name }}</strong>
+            <small>({{ comment.commentsdate }})</small>:
+            {{ comment.comments }}
+
+            {% if comment.login == request.user %}
+              <form action="{% url 'delete_comment' comment.id %}" method="post" onsubmit="return confirm('Delete this comment?')" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="button-styled" style="background: crimson; color: white;">Delete</button>
+              </form>
+            {% endif %}
+          </li>
+        {% empty %}
+          <li>No comments yet. Be the first to drop some wisdom 💬</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Add Comment -->
+    <div class="add_comment" style="margin: 10px 15px;">
+      {% if user.is_authenticated %}
+        <form method="post" action="{% url 'add_comment' post.id %}">
+          {% csrf_token %}
+          <textarea name="comment" placeholder="Say something nice..." class="custom-textarea" required style="width: 100%; border-radius: 5px;"></textarea><br>
+          <button type="submit" class="button-styled">Post Comment</button>
+        </form>
+      {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to leave a comment.</p>
+      {% endif %}
+    </div>
+
+    <hr style="margin-top: 20px;">
+  </div>
+{% endfor %}
+
+    
+    
+
+    <!--JOB SECTION-->
+        <div class="search-bar ">
+            <input type="text" placeholder="job title or keyword">
+            <button>Search</button>
+        </div>
+       
+        <section class="recommended-jobs">
+            <h3>Jobs</h3>
+            <div class="job-cards">
+                <!-- Job 1 -->
+                {% for job in jobs %}
+                <a href="{% url 'job_details_agency' %}?jobid={{ job.id }}">
+                  <div class="job-card">
+                    {% if job.agency %}
+                        <img src="{{ job.agency.logo.url }}" alt="Agency Logo" class="company-logo">
+                    {% else %}
+                     <img src="{{ job.organization.logo.url }}" alt="Organization Logo" class="company-logo">
+                    {% endif %}
+
+                    <h4>{{ job.position }}</h4>
+                    <p>{{ job.cmpname }}</p>
+                    <p>{{ job.city }}, {{ job.city.state }}</p>
+                    <span class="date">{{ job.posted_date }}</span>
+                  </div>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+
+
+<script>
+
+document.getElementById("overviewForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let overviewText = document.querySelector("#id_overview").value;  // Ensure this is correct
+    
+    fetch("{% url 'update_overview' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: JSON.stringify({ overview: overviewText })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById("overviewText").innerText = data.overview;
+            bootstrap.Modal.getInstance(document.getElementById('overviewModal'));
+        } else {
+            alert("Error: " + data.error);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+</script>    
+    
+    {% load static %}
+</body>
+<script src="{% static 'js/company_job.js' %}" defer></script>
+<script src="{% static 'js/company_post.js' %}" defer></script>
+<script src="{% static 'js/company_home.js' %}" defer></script>
+
+</html>

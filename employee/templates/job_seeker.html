@@ -1,0 +1,252 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job_seeker information</title>
+    <link rel="stylesheet" href="/static/css/job_seeker.css?{% now "U" %}">
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--Font awesome cdn js-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="header">
+        <nav>
+          <img class="logo" src="/static/logo.png" title="logo" />
+          <h2>FreshMinds</h2>
+        </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="left">
+            <div class="intro">
+                <h1>Hello</h1>
+                <p>Join our platform to access a wide range of job seekers and enhance your hiring capabilities.</p>
+                  
+              </div>
+        </div>
+        <div class="right">
+                <form method="post" id="jobseekerForm" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <input type="hidden" id="strstatus" name="strstatus" value="Active" />
+                <input type="hidden" id="strrole" name="strrole" value="Personal" />
+
+                <h2>Job seeker information</h2>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control input" id="firstname" name="firstname" placeholder="First Name" required>
+                    <span id="firstnameError" class="error-text"></span>
+                </div>
+               
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control input" id="lastname" name="lastname" placeholder="Last Name" required>
+                    <span id="lastnameError" class="error-text"></span>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <label for="gender">Gender</label>
+                    <span id="genderError" class="error-text"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="dateofbirth" name="dateofbirth" placeholder="Date of Birth" required>
+                    <label for="floatingInputValue">Date of Birth</label>
+                    <span id="dobError" class="error-text"></span>
+                </div>
+               <br/>
+
+                <div class="d-grid gap-2">
+                <select id="city" name="city" class="select1" title="city">
+              <option value="none" class="none">Choose City</option>
+                  {% for city in cities %}
+                 <option value="{{ city.id }}">{{ city.cityname }}</option>
+                 <option value="{{ city.state.id }}">{{ city.state.sname }}</option>
+                  {% endfor %}
+                </select>
+                <span id="cityError" class="error-text"></span>
+                </div>
+            <br/>
+              
+
+            <div class="input-group mb-3">
+                <input type="file" class="form-control h-75" id="profile" name="profile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept=".jpg,.jpeg,.png" required>
+                <label class="input-group-text h-75" for="inputGroupFile04">Upload profile</label>
+                <span id="profileError" class="error-text"></span>
+              </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Location</span>
+                    <textarea class="form-control fixed-size" id="address" name="address" placeholder="Your location" aria-label="With textarea" required></textarea>
+                    <span id="addressError" class="error-text"></span>
+                </div>
+                
+                <div class="input-group mb-3">
+                    <input type="text" id="strmobileno" name="strmobileno" placeholder="Phone No" pattern="[6-9][0-9]{9}" required>
+                    <label for="strmobileno">Mobile Number:</label>
+                    <span id="mobileError" class="error-text"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control input" id="position" name="position" placeholder="Enter position" required>
+                        <span id="lastnameError" class="error-text"></span>
+                    </div>
+            <span id="positionError" class="error-text"></span>
+                </div>
+    
+
+                <div class="password">
+                    <input type="password" class="form-control input" id="strpass" name="strpass" placeholder="password" required>
+                    <span id="passwordError" class="error-text"></span>
+                </div>
+                <div class="password1">
+                    <input type="password" class="form-control input" id="confirmpass" name="confirmpass" placeholder="Confirm password" required>
+                    <span id="confirmPasswordError" class="error-text"></span>
+                </div>
+
+                <input class="form-control input" type="email" id="stremail" name="stremail" placeholder="Email Address" aria-label="default input example" required>
+                <span id="emailError" class="error-text"></span>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                </div>
+                <div id="errorMessages" style="color: red;">
+                    {{error}}
+                </div>
+            </form>
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% load static %}
+</body>
+<script src="{% static 'js/password.js' %}" defer></script>
+<!--<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("jobseekerForm");
+
+    form.addEventListener("submit", function (event) {
+        let errorMessage = "";
+        let isValid = true; // Track if the form is valid
+
+        // First Name Validation
+        const fnamejs = document.getElementById("firstname").value.trim();
+        const namePattern = /^[A-Za-z]+$/;
+        if (!namePattern.test(fnamejs)) {
+            errorMessage += "First name should contain only alphabets.<br>";
+            isValid = false;
+        }
+
+        // Last Name Validation
+        const lnamejs = document.getElementById("lastname").value.trim();
+        if (!namePattern.test(lnamejs)) {
+            errorMessage += "Last name should contain only alphabets.<br>";
+            isValid = false;
+        }
+
+        // Address Validation
+        const addressjs = document.getElementById("address").value.trim();
+        if (addressjs.length < 10) {
+            errorMessage += "Address should be at least 10 characters long.<br>";
+            isValid = false;
+        }
+
+        // Contact Number Validation
+        const jscontactno = document.getElementById("strmobileno").value.trim();
+        const phonePattern = /^[6-9]\d{9}$/;
+
+        if (jscontactno === "") {
+            errorMessage += "Mobile number is required.<br>";
+            isValid = false;
+        } else if (!phonePattern.test(jscontactno)) {
+            errorMessage += "Enter a valid 10-digit phone number starting with 6, 7, 8, or 9.<br>";
+            isValid = false;
+        }
+
+        // Email Validation
+        const emailjs = document.getElementById("stremail").value.trim();
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailPattern.test(emailjs)) {
+            errorMessage += "Enter a valid email address.<br>";
+            isValid = false;
+        }
+
+        // File Upload Validation
+        const fileInput1 = document.getElementById("profile");
+        if (fileInput1.files.length === 0) {
+            errorMessage += "Please select an image file.<br>";
+            isValid = false;
+        } else {
+            const file = fileInput1.files[0];
+            const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+            const maxFileSize = 2 * 1024 * 1024;
+
+            if (!allowedExtensions.test(file.name)) {
+                errorMessage += "Only .jpg, .jpeg, or .png files are allowed.<br>";
+                isValid = false;
+            }
+            if (file.size > maxFileSize) {
+                errorMessage += "File size must not exceed 2MB.<br>";
+                isValid = false;
+            }
+        }
+
+        // Password Validation
+        const password = document.getElementById("strpass").value.trim();
+        const confirmPassword = document.getElementById("confirmpass").value.trim();
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordPattern.test(password)) {
+            errorMessage += "Password must be at least 8 characters long and include at least one letter, one number, and one special character.<br>";
+            isValid = false;
+        }
+
+        // Confirm Password Validation
+        if (password !== confirmPassword) {
+            errorMessage += "Passwords do not match.<br>";
+            isValid = false;
+        }
+
+        // Dropdown Validation
+        const positionDropdown = document.getElementById("position");
+        if (positionDropdown.value === "none") {
+            errorMessage += "Please select a position.<br>";
+            isValid = false;
+        }
+
+        const cityDropdown = document.getElementById("city");
+        if (cityDropdown.value === "none") {
+            errorMessage += "Please select a city.<br>";
+            isValid = false;
+        }
+
+        const errorDiv = document.getElementById("errorMessages");
+        errorDiv.innerHTML = ""; // Clear previous errors
+
+        // If there are errors, prevent form submission and show errors
+        if (!isValid) {
+            errorDiv.innerHTML = "<ul><li>" + errorMessage.replace(/<br>/g, "</li><li>") + "</li></ul>";
+            event.preventDefault();
+        } else {
+            // Redirect to another page if all validations pass
+            alert("Form submitted successfully!");
+        }
+    });
+});
+
+</script>-->
+</html>
