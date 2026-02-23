@@ -47,6 +47,7 @@ class CustomLogoutView(LogoutView):
         return "/"  # Redirect to custom page
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
     path('admin/', global_admin.urls),
     path('accounts/', include('django.contrib.auth.urls')),  # Include authentication URLs
@@ -68,6 +69,9 @@ urlpatterns = [
     path('company_home',views.business_profile),
     path('agency_profile',views.agency_profile),
     
+
+    path('post/<int:post_id>/delete/', views.delete_post, name='delete_post'),
+
     path('company_post',views.company_post),
     path('agency_post',views.agency_post),
     

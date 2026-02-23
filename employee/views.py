@@ -67,6 +67,8 @@ def like_post(request, post_id):
 
     return redirect(request.META.get('HTTP_REFERER', '/'))  # or wherever your homepage points
 
+
+
 from django.shortcuts import get_object_or_404, redirect
 from .models import Comments, Post
 from django.contrib.auth.decorators import login_required
@@ -118,6 +120,23 @@ def post_detail(request, post_id):
         'comments': comments,
     })
 
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+@login_required
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    # Only the owner can delete the post
+    if post.login != request.user:
+        messages.error(request, "You can't delete someone else’s post bro 😭")
+        return redirect(request.META.get('HTTP_REFERER', '/'))  # change to your homepage route
+
+    post.delete()
+    messages.success(request, 'Post deleted successfully!')
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))  # or wherever your post list is
 
 
 from django.shortcuts import get_object_or_404, redirect, render

@@ -36,6 +36,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts_app',
+    'posts_app',
+    'comments_app',
+    'analytics_app',
+    "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -154,3 +159,55 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Ensure the default storage is configured
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+JAZZMIN_SETTINGS = {
+    "site_title": "FreshMinds Admin",
+    "site_header": "FreshMinds Dashboard",
+    "welcome_sign": "Welcome to FreshMinds Admin",
+    "copyright": "FreshMinds",
+    "search_model": ["auth.User", "yourapp.YourModel"],
+    "show_ui_builder": True,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "darkly",
+    "dark_mode_theme": "darkly",
+     "navbar": "navbar-dark",
+    "footer_small_text": True,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_fixed": True,
+    "theme_switcher": False,
+}
+JAZZMIN_SETTINGS = {
+    "site_title": "FreshMinds Admin",
+    "site_header": "FreshMinds Dashboard",
+    "welcome_sign": "Welcome Back, Mitu ✨",
+
+    # ↓ The magic part: dashboard widgets
+    "custom_links": {
+        "employee": [{
+            "name": "Add Employee",
+            "url": "employee_employee_add",
+            "icon": "fas fa-user-plus",
+        }]
+    },
+
+    "dashboard_widgets": [
+        {
+            "type": "model_list",
+            "title": "Your Models",
+            "models": ["employee.*", "auth.*"]
+        },
+        {
+            "type": "recent_actions",
+            "title": "Recent Activity",
+            "limit": 10
+        },
+        {
+            "type": "link",
+            "title": "Visit Google",
+            "url": "https://google.com",
+            "icon": "fas fa-external-link-alt"
+        }
+    ],
+}
+

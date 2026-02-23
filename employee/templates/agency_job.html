@@ -29,38 +29,37 @@
 
             </div>
                 <button type="button" class="btn btn-dark bg-black" data-bs-toggle="modal" data-bs-target="#settingsModal">
-                    <i class="fa-solid fa-gear fs-5" style="color: #ffffff;"></i>
-                </button>
-                <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header bg-dark">
-                          <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body bg-dark">
-                          <ul class="list-group bg-dark">
-                            <li class="list-group-item bg-dark">
-                              <a href="#" class="text-decoration-none text-light">Edit Profile</a>
-                            </li>
-                            <li class="list-group-item bg-dark">
-                              <a href="#" class="text-decoration-none text-light">Create CV</a>
-                            </li>
-                            <li class="list-group-item bg-dark">
-                              <a href="#" class="text-decoration-none text-danger">Log Out</a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="modal-footer bg-dark">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">&nbsp;&nbsp;Close&nbsp;&nbsp;</button>
-                        </div>
-                      </div>
+                <i class="fa-solid fa-gear fs-5" style="color: #ffffff;"></i>
+            </button>
+        </div>
+    </div>
+</header>
+            <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header bg-dark">
+                      <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-dark">
+                      <ul class="list-group bg-dark">
+                   
+                        <li class="list-group-item bg-dark">
+                            <a href="/" class="text-decoration-none text-danger">Log Out</a>
+                        </li>
+                        <li class="list-group-item bg-dark">
+                            <a href="/forgot-password" class="text-decoration-none text-danger">Forgot Password</a>
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="modal-footer bg-dark">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">&nbsp;&nbsp;Close&nbsp;&nbsp;</button>
                     </div>
                   </div>
-            </div>
+                </div>
+              </div>
         </div>
-        
-    </header>
+    </div>
 
 
     
@@ -70,7 +69,7 @@
         <img src="{{agency.logo.url}}" alt="Microsoft Logo" class="logo1">
         <div class="header-content">
           <h1>{{ agency.cmpname }}</h1>
-      <p>{{ agency.address }} · 24M followers
+      <p>{{ agency.address }} </p>
       <button class="follow-button">Following</button>
         </div>
     </header>
@@ -106,7 +105,7 @@
     
     <!-- Button to Open the Form -->
     <!-- Button to Open the Job Form -->
-<button id="openJobForm" class="btn btn-primary"><a style="text-decoration: none; color: #ffffff;" href="Job_Post">Add Job</a></button>
+<button id="openJobForm" class="btn btn-primary"><a style="text-decoration: none; color: #ffffff;" href="Job_post_agency">Add Job</a></button>
 
 <!-- Job Form Popup -->
 <div id="jobForm" class="popup-form">

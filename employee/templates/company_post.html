@@ -129,6 +129,15 @@
           <a class="prg1" href="{% url 'user_profile_view' username=post.login.username %}">
             @{{ post.login.first_name }}
           </a>
+          {% if user.is_authenticated and user == post.login %}
+        <form action="{% url 'delete_post' post.id %}" method="post" style="display:inline;"
+          onsubmit="return confirm('Delete this post? This action cannot be undone.')">
+          {% csrf_token %}
+          <button type="submit" style="border:none; background:none; color:red; cursor:pointer;">
+            🗑 Delete
+          </button>
+        </form>
+        {% endif %}
         </div>
     
         <!-- Post Body -->

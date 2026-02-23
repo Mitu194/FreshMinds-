@@ -70,15 +70,11 @@
           <option value="none" class="none">Choose City</option>
           {% for city in cities %}
           <option value="{{ city.id }}">{{ city.cityname }}</option>
-          {% endfor %}
-        </select>
-
-        <select id="state" name="state" class="select1">
-          <option value="none" class="none">Choose State</option>
-          {% for city in cities %}
           <option value="{{ city.state.id }}">{{ city.state.sname }}</option>
           {% endfor %}
         </select>
+
+
         
         <select id="ccid" name="ccid" class="select1">
           <option value="none" class="none">Choose Category</option>

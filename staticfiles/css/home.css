@@ -72,13 +72,13 @@ nav a {
 }
 
 .div1 {
-  flex: 1;
+  margin-top: 20px;
   margin-right: 8px; 
 }
 
 .body1{
   width: 47%;
-  background-color: #deedfc;
+  background-color: #efebfb;
   margin-left: 380px;
   margin-right: 5px;
   padding-left: 57px;
@@ -107,7 +107,7 @@ nav a {
   padding: 20px;
   border-radius: 13px;
   margin-right: 20px;
-  height: 92%;
+  height: 85%;
   width: 21%;
   box-shadow: 1px 0 7px rgba(0, 0, 0, 0.3);
 }
@@ -144,7 +144,92 @@ label{
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/*cards*/
+.card {
+  width: 600px;  /* Fixed width */
+  height: 500px; /* Fixed height */
+  border-radius: 12px;
+  justify-content: center;
+  margin-bottom: 20px; /* Adds spacing between posts */
+  background: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  border: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Soft shadow */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.postimg {
+  width: 100%;
+  height: 250px; /* Adjusted image height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5; /* Light background */
+}
+
+.postimg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the space properly */
+  border-radius: 12px 12px 0 0;
+}
+
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.title {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.5;
+  max-height: 80px; /* Restricts text overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.button {
+  padding: 8px 16px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.button:hover {
+  background: #0056b3;
+}
+
+/*cards
 .card {
   width: 600px;
   border-radius: 8px;
@@ -153,7 +238,6 @@ label{
   display: block;
   margin-top: 10px;
   border: none;
-  /*border: 2px solid rgb(216, 214, 214);*/
 }
 
 .card-header {
@@ -183,7 +267,7 @@ label{
   border-radius: 15px 15px 0 0; 
   margin-top: 5px;
 }
-
+*/
 h1,h2{
   display: inline;
   margin-left: 5px;
@@ -300,11 +384,24 @@ h1,h2{
   height: 100%;
 }
 
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2); /* optional tint */
+  backdrop-filter: blur(6px);
+  z-index: 150; /* Less than popup z-index */
+  display: none; /* hide it by default */
+}
+
 /*popup*/
 .popup {
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 65%;
   transform: translate(-50%, -50%);
   background: #ebebeb;
   padding: 2px;
@@ -313,12 +410,15 @@ h1,h2{
   z-index: 200; 
   display: none;
 }
+.overlay{
+  backdrop-filter: blur(5px);
+}
 
 .popup-content {
   background: white;
   display: flex;
   border-radius: 10px;
-  width: 820px;  /* Fixed width */
+  width: 800px;  /* Fixed width */
   height: 550px; /* Fixed height */
   overflow: hidden;
   position: relative;
@@ -564,4 +664,49 @@ font-size: 12px;
 }
 .highlight {
   background-color: yellow; 
+}
+textarea.custom-textarea {
+  width: 100%;
+  min-height: 70px;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  resize: vertical;
+  background-color: #fdfdfd;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+textarea.custom-textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.2);
+  background-color: #fff;
+}
+.button-styled {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.button-styled:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 16px rgba(0, 86, 179, 0.3);
+}
+
+.button-styled:active {
+  transform: scale(0.96);
+}
+
+.button-styled:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
 }

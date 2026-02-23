@@ -173,3 +173,7 @@ button a{
     text-decoration: none;
     color: #fff;
 }
+#dropdown2{
+    border-radius: 5%;
+    width: 250px;
+}

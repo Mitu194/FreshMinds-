@@ -177,8 +177,8 @@ main {
 
 /*new css of job card*/
 .job-list {
-    width: 75%;
-    margin-left: 80px;
+    width: 100%;
+    margin-left: 60px;
 }
 
 .job-card {
@@ -195,7 +195,7 @@ main {
     /* Adjust card width */
     display: inline-block;
     vertical-align: top;
-    margin-right: 20px;
+    margin-right: 30px;
 }
 
 .job-header {

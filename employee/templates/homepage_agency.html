@@ -56,28 +56,21 @@
                                 </select>
                             </div>
             
-                            <div class="filter-item">
-                                <label for="experience">Experience</label>
-                                <select id="experience" name="experience">
-                                    <option>--Select experience--</option>
-                                    <option value="0 - 3 years" {% if selected_experience == "0 - 3 years" %}selected{% endif %}>0 - 3 years</option>
-                                    <option value="4 - 7 years" {% if selected_experience == "4 - 7 years" %}selected{% endif %}>4 - 7 years</option>
-                                    <option value="8 - 10 years" {% if selected_experience == "8 - 10 years" %}selected{% endif %}>8 - 10 years</option>
-                                    <option value="More than 10 years" {% if selected_experience == "More than 10 years" %}selected{% endif %}>More than 10 years</option>
-                                </select>
-                            </div>
-            
-                            <div class="filter-item">
-                                <label for="jobtype">Job type</label>
-                                <select id="jobtype" name="jobtype">
-                                    <option>--Select Job type--</option>
-                                    <option value="full-time" {% if 'full-time' in selected_jobtypes %}selected{% endif %}>Full Time</option>
-                                    <option value="part-time" {% if 'part-time' in selected_jobtypes %}selected{% endif %}>Part Time</option>
-                                    <option value="internship" {% if 'internship' in selected_jobtypes %}selected{% endif %}>
-                                        Internship</option>
-                                </select>
-            
-                            </div>
+                            
+                          <div class="filter-item">
+                        <label for="experience">Experience</label>
+                        <select id="experience" name="experience">
+                            <option>--Select experience--</option>
+                            <option value="0 - 3 years" {% if selected_experience == "0 - 3 years" %}selected{% endif %}>0 - 3 years</option>
+                            <option value="4 - 7 years" {% if selected_experience == "4 - 7 years" %}selected{% endif %}>4 - 7 years</option>
+                            <option value="8 - 10 years" {% if selected_experience == "8 - 10 years" %}selected{% endif %}>8 - 10 years</option>
+                            <option value="More than 10 years" {% if selected_experience == "More than 10 years" %}selected{% endif %}>More than 10 years</option>
+                        </select>
+                    </div>
+
+
+
+
                             <div class="filter-item">
                                 <label for="position">Position</label>
                                 <select id="position" name="position">

@@ -1,9 +1,39 @@
-{% extends "admin/change_list.html" %}
+{% extends "admin/base_site.html" %}
+{% load admin_list admin_urls static %}
+
 {% block extrahead %}
     {{ block.super }}
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <!-- jQuery is already included in Django Admin -->
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const table = document.querySelector("table");
+            if (table) {
+                new DataTable(table);
+            }
+        });
+    </script>
+
+    <div class="p-4" style="font-size:18px; color:white;">
+        Page Updated Here 🎉
+    </div>
+{% endblock %}
+
+
+
+<!--{% extends "admin/change_list.html" %}
+{% block extrahead %}
+    {{ block.super }}
+     DataTables CSS 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    jQuery is already included in Django Admin 
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 {% endblock %}
 
@@ -11,4 +41,4 @@
     {{ block.super }}
     Page Updated Here
    
-{% endblock %}
+{% endblock %}-->
