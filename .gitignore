@@ -1,8 +1,7 @@
-.vscode/
+.venv/
+newenv/
+media/
 __pycache__/
 *.pyc
-media/
-staticfiles/
+db.sqlite3
 .env
-*.sqlite3
-*.log
