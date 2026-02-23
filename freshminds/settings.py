@@ -36,10 +36,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts_app',
-    'posts_app',
-    'comments_app',
-    'analytics_app',
     "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,6 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'accounts',
+    'posts',
+    'comments',
+    'analytics_dashboard',
     'employee',
 ]
 
