@@ -30,8 +30,10 @@ SECRET_KEY = 'django-insecure-i@ai%rakktw-6h(j@)1u72#t^)f19ut93kuvoia*+aniqknzoj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Application definition
 
@@ -96,6 +98,9 @@ DATABASES = {
         'PASSWORD':'mitu1942005@',
         'HOST':'localhost',
         'PORT':'3306',
+        
+       # "default": dj_database_url.config(
+        #default=os.environ.get("DATABASE_URL"))
     }
 }
 
