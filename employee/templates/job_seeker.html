@@ -70,7 +70,6 @@
               <option value="none" class="none">Choose City</option>
                   {% for city in cities %}
                  <option value="{{ city.id }}">{{ city.cityname }}</option>
-                 <option value="{{ city.state.id }}">{{ city.state.sname }}</option>
                   {% endfor %}
                 </select>
                 <span id="cityError" class="error-text"></span>
