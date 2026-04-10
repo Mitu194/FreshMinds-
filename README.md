@@ -8,7 +8,7 @@ The goal of this project is to explore scalable backend design, optimized databa
 ---
 
 ## 🚀 Live Demo
-(Deploy link here)
+https://freshminds.onrender.com/
 
 ---
 
