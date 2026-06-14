@@ -50,6 +50,9 @@ from .models import Post, Likes
 
 from django.views.decorators.http import require_POST
 
+
+
+
 @require_POST
 def like_post(request, post_id):
     if request.user.is_authenticated:
