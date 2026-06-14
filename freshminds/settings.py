@@ -90,9 +90,20 @@ WSGI_APPLICATION = 'freshminds.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.mysql',  # ✅ MySQL engine
+        'NAME': 'django',                        # ✅ Your DB name
+        'USER': 'root',
+        'PASSWORD': 'mitu1942005@',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+
+'''DATABASES = {
+    'default': {
+        
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'NAME': 'django',
@@ -106,15 +117,7 @@ DATABASES = {
     }
 }
 '''
-import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=dj_database_url.config(conn_max_age=600),  # fallback for local
-        conn_max_age=600
-    )
-}
-'''
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
